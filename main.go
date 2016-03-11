@@ -31,7 +31,7 @@ func getWidth() uint {
 }
 
 func ColWidth() uint {
-	return 120
+	return 100
 }
 
 func main() {
@@ -50,6 +50,7 @@ func main() {
 	colspace := strings.Repeat(" ", colwidth)
 
 	// read from each file, parsing timestamp, and then output it appropriately
+	fmt.Print("                    ")
 	lines := []string{}
 	for i := 0; i < numfiles; i++ {
 		l, _ := fns[i].ReadString('\n')
@@ -59,8 +60,6 @@ func main() {
 		fmt.Print(strings.Repeat(" ", colwidth-len(name)))
 	}
 	fmt.Println()
-
-	// print out table headings
 
 	for {
 		minline := 0
@@ -75,7 +74,9 @@ func main() {
 		if lines[minline] == "" {
 			break
 		}
-		fmt.Print(strings.Repeat(colspace, minline) + lines[minline])
+		fields := strings.Fields(lines[minline])
+		fmt.Print(fields[0] + "    ")
+		fmt.Print(strings.Repeat(colspace, minline) + lines[minline][len(fields[0]):])
 		l, _ := fns[minline].ReadString('\n')
 		lines[minline] = l
 	}
