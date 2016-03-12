@@ -31,7 +31,7 @@ func getWidth() uint {
 }
 
 func ColWidth() uint {
-	return 100
+	return getWidth()
 }
 
 func main() {
